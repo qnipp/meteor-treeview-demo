@@ -1,0 +1,102 @@
+<head>
+  <title>treedata</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="page-header">
+      <h1>TreeView demonstration</h1>
+      <p class="lead">Configure the TreeView and try it out.</p>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Test the tree</h2>
+        {{> TreeData options}}
+      </div>
+      <div class="col-md-4">
+        <h2>Try the options</h2>
+        {{> Options}}
+      </div>
+      <div class="col-md-4">
+        <h2>Use this configuration</h2>
+        {{> Configuration}}
+        <h3>Put this into your template</h3>
+        <pre>{{|> TreeView treeArgs }}</pre>
+      </div>
+    </div>
+  </div>
+</body>
+
+<template name="TreeData">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      {{> TreeView treeArgs }}
+    </div>
+  </div>
+  <p class="alert alert-info">{{message}}</p>
+  <p>Your country is missing? Just create a Github Pull Request.</p>
+</template>
+
+<template name="Options">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h4>Plugins</h4>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" {{b "check: dnd"}}> Activate Drag &amp; Drop for moving and copying
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" {{b "check: contextmenu"}}> Create context menu
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" {{b "check: state"}}> Save state between reloads
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" {{b "check: sort"}}> Activate sort plugin
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" {{b "check: checkbox"}}> Show checkboxes to select nodes
+        </label>
+      </div>
+      <h4>Actions</h4>
+      <label class="checkbox-inline">
+        <input type="checkbox" {{b "check: create, enable: contextmenu"}}>Create
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" {{b "check: rename, enable: contextmenu"}}>Rename
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" {{b "check: delete, enable: contextmenu"}}>Delete
+      </label>
+      <br/>
+      <label class="checkbox-inline">
+        <input type="checkbox" {{b "check: copy, enable: copymoveenable"}}>Copy
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" {{b "check: move, enable: copymoveenable"}}>Move
+      </label>
+      <h4>Selected and root node</h4>
+      <select class="form-control" {{b "options: selectOptions, optionsValue: id, optionsText: name, value: selectNode, defaultText: 'Preselect a node when loading.'"}}></select>
+      <select class="form-control" {{b "options: selectOptions, optionsValue: id, optionsText: name, value: parentNode, defaultText: 'Select the parent to limit the shown nodes.'"}}></select>
+      <h4>Misc</h4>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" {{b "check: getNodes"}}> Use alternative <code>getNodes</code> function
+        </label>
+      </div>
+      <button class="btn btn-default" {{b "click: resetData()"}}>Reset data</button>
+    </div>
+  </div>
+</template>
+
+<template name="Configuration">
+  <div><textarea class="form-control" style="font-size: 80%; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;" {{b "text: configurationString, attr: {rows: configurationRows}"}} readonly></textarea></div>
+</template>
