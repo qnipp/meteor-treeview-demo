@@ -123,7 +123,9 @@ if (Meteor.isClient) {
           return '%%collection%%';
         }
         if (typeof value === 'function') {
-          return '%%function(e, item, data) {…}%%'
+          if (key === 'getNodes') return '%%function(parent) {…}%%';
+          if (key === 'aAttr') return '%%function(item) {…}%%';
+          return '%%function(e, item, data) {…}%%';
         }
         return value;
       }, 2);
