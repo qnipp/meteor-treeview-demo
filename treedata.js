@@ -14,6 +14,7 @@ if (Meteor.isClient) {
       sort: true,
       parentNode: null,
       selectNode: null,
+      openAll: false,
       getNodes: false,
       configurationString: ""
     }
@@ -61,6 +62,7 @@ if (Meteor.isClient) {
         subscription: 'TreeData',
         parent: this.parentNode(),
         select: this.selectNode(),
+        openAll: this.openAll(),
         mapping: {
           text: 'name',
           aAttr: function(item) {
