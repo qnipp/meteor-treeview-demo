@@ -85,11 +85,16 @@
         <input type="checkbox" {{b "check: move, enable: copymoveenable"}}>Move
       </label>
       <h4>Selected and root node</h4>
-      <select class="form-control" {{b "options: selectOptions, optionsValue: id, optionsText: name, value: selectNode, defaultText: 'Preselect a node when loading.'"}}></select>
-      <select class="form-control" {{b "options: selectOptions, optionsValue: id, optionsText: name, value: parentNode, defaultText: 'Select the parent to limit the shown nodes.'"}}></select>
+      <select class="form-control" {{b "options: selectOptions, optionsValue: id, optionsText: name, value: selectNode, defaultText: 'Preselect a node when loading (disable state plugin before)'"}}></select>
+      <select class="form-control" {{b "options: selectOptions, optionsValue: id, optionsText: name, value: parentNode, defaultText: 'Select the parent to limit the shown nodes (should contain children)'"}}></select>
       <div class="checkbox">
         <label>
           <input type="checkbox" {{b "check: openAll"}}> Open all nodes on loading
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" {{b "check: selectAll"}}> Select all nodes on loading
         </label>
       </div>
       <h4>Misc</h4>

@@ -15,6 +15,7 @@ if (Meteor.isClient) {
       parentNode: null,
       selectNode: null,
       openAll: false,
+      selectAll: false,
       getNodes: false,
       configurationString: ""
     }
@@ -63,6 +64,7 @@ if (Meteor.isClient) {
         parent: this.parentNode(),
         select: this.selectNode(),
         openAll: this.openAll(),
+        selectAll: this.selectAll(),
         mapping: {
           text: 'name',
           aAttr: function(item) {
@@ -74,6 +76,7 @@ if (Meteor.isClient) {
         jstree: { plugins },
         events: {
           changed(e, item, data) {
+            console.log(data);
             instance.message.set("Changing selection. " + item.length + " nodes are selected.");
           },
           create(e, item, data) {
