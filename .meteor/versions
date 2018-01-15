@@ -59,7 +59,7 @@ observe-sequence@1.0.16
 ordered-dict@1.0.9
 promise@0.10.1
 qnipp:jstree@3.3.0
-qnipp:treeview@1.1.0
+qnipp:treeview@1.1.1
 random@1.0.10
 reactive-dict@1.2.0
 reactive-var@1.0.11

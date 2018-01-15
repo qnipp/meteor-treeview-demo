@@ -27,19 +27,19 @@ if (Meteor.isClient) {
     item.parent = parent;
     let newId = TreeData.insert(item);
 
-    TreeData.find({parent: id}).forEach(function(item) {
+    TreeData.find({ parent: id }).forEach(function (item) {
       recursiveCopy(item._id, newId);
     });
   }
 
   function recursiveDelete(id) {
-    TreeData.find({parent: id}).forEach(function(item) {
+    TreeData.find({ parent: id }).forEach(function (item) {
       recursiveDelete(item._id);
     });
     TreeData.remove(id);
   }
 
-  Template.TreeData.onCreated(function() {
+  Template.TreeData.onCreated(function () {
     let instance = this;
     instance.message = new ReactiveVar('Messages will be put here.');
   });
@@ -67,7 +67,7 @@ if (Meteor.isClient) {
         selectAll: this.selectAll(),
         mapping: {
           text: 'name',
-          aAttr: function(item) {
+          aAttr: function (item) {
             return {
               title: item._id
             };
@@ -81,18 +81,18 @@ if (Meteor.isClient) {
           },
           create(e, item, data) {
             instance.message.set("Creating node on " + data.parent);
-            return TreeData.insert({name: 'New node', parent: data.parent});
+            return TreeData.insert({ name: 'New node', parent: data.parent });
           },
           rename(e, item, data) {
             instance.message.set("Renaming " + item + " to " + data.text);
-            TreeData.update(item, {$set: {name: data.text}});
+            TreeData.update(item, { $set: { name: data.text } });
           },
           delete(e, item, data) {
             instance.message.set("Deleting " + item);
             recursiveDelete(item);
           },
           copy(e, item, data) {
-            if(data.parent == '#') {
+            if (data.parent == '#') {
               instance.message.set("Copying to the root is forbidden.");
               return false;
             }
@@ -100,12 +100,12 @@ if (Meteor.isClient) {
             recursiveCopy(item, data.parent);
           },
           move(e, item, data) {
-            if(data.parent == '#') {
+            if (data.parent == '#') {
               instance.message.set("Moving to the root is forbidden.");
               return false;
             }
             instance.message.set("Recursively moving nodes.");
-            TreeData.update(item, {$set: {parent: data.parent}});
+            TreeData.update(item, { $set: { parent: data.parent } });
           }
         }
       }
@@ -116,11 +116,11 @@ if (Meteor.isClient) {
       if (!this.copy()) delete config.events.copy;
       if (!this.move()) delete config.events.move;
 
-      if (this.getNodes()) config.getNodes = function(parent) {
-        return TreeData.find({parent}, {sort: {name: -1}});
+      if (this.getNodes()) config.getNodes = function (parent) {
+        return TreeData.find({ parent }, { sort: { name: -1 } });
       }
 
-      let configString = JSON.stringify(config, function(key, value) {
+      let configString = JSON.stringify(config, function (key, value) {
         if (key === '__proto__') {
           return undefined;
         }
@@ -153,8 +153,8 @@ if (Meteor.isClient) {
       return this.contextmenu() || this.dnd();
     },
     selectOptions() {
-      let options = TreeData.find().map(function(item) {
-        return {id: item._id, name: item.name};
+      let options = TreeData.find().map(function (item) {
+        return { id: item._id, name: item.name };
       });
       return options;
     },
